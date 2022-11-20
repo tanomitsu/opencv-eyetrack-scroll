@@ -22,4 +22,5 @@
     "python.linting.flake8Path": "${workspaceFolder}/.venv/bin/flake8",
     "python.linting.mypyEnabled": true,
     "python.linting.mypyPath": "${workspaceFolder}/.venv/bin/mypy"
+    // "python.linting.mypyArgs": ["--strict"]
 }

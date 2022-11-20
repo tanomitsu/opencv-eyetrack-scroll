@@ -1,10 +1,13 @@
 [tool.poetry]
-name = "opencv-python"
+name = "opencv_python"
 version = "0.1.0"
 description = ""
 authors = ["tanomitsu2002 <tanomitsu2002@gmail.com>"]
 readme = "README.md"
-packages = [{include = "opencv_python"}]
+packages = [
+  {include = "src"},
+  {include = "tests"},
+]
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -23,6 +26,7 @@ flake8-pytest-style = "^1.6.0"
 pep8-naming = "^0.13.2"
 isort = "^5.10.1"
 pyproject-flake8 = "^5.0.4.post1"
+pytest = "^7.2.0"
 
 [build-system]
 requires = ["poetry-core"]
@@ -71,3 +75,9 @@ max-line-length = 79
 extend-ignore = ["E203", "W503"]
 exclude = [".venv", ".git", "__pycache__",]
 max-complexity = 10
+
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+]
+pythonpath = "src"
