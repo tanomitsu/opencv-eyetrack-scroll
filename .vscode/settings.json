@@ -2,7 +2,8 @@
     "python.linting.enabled": true,
     "[python]": {
         "editor.tabSize": 4,
-        "editor.formatOnSave": true
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true
     },
     "[json]": {
         "editor.tabSize": 4

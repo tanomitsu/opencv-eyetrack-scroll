@@ -1,4 +1,4 @@
-from .eye_tracking.test import import_check
+import cv2
 
 
 def say_hello() -> str:
@@ -6,5 +6,15 @@ def say_hello() -> str:
 
 
 def main() -> None:
-    print("Hello, world!")
-    import_check()
+    cap = cv2.VideoCapture(0)
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+
+        cv2.imshow("Frame", frame)
+        if cv2.waitKey(1) & 0xFF == ord("q"):
+            # qキーを押したら終了
+            break
+    cap.release()
+    cv2.destroyAllWindows()

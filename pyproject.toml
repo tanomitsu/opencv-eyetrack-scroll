@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "opencv_python"
+name = "myapp"
 version = "0.1.0"
 description = ""
 authors = ["tanomitsu2002 <tanomitsu2002@gmail.com>"]
@@ -11,6 +11,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.10"
+opencv-python = "^4.6.0.66"
 
 
 [tool.poetry.group.dev.dependencies]
