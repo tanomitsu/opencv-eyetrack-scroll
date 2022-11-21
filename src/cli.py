@@ -7,7 +7,6 @@ landmarks:
 import cv2
 import dlib
 
-# from .eye_tracking.eye_track import eye_track
 from .face.face_detect import get_one_face, get_face_mid
 from .type import Point
 from .color import bgr_red
