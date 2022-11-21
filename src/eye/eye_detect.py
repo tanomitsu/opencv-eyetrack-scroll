@@ -16,7 +16,9 @@ def get_eye_center(points: list[Point]) -> Point:
 
 
 # 目の輪郭を検知して円を描画する関数
-def get_contouring(thresh, face_mid_y, frame, is_right: bool = False) -> Mat:
+def get_contouring(
+    thresh, face_mid_y, frame=None, is_right: bool = False
+) -> Point | None:
     cnts, _ = cv2.findContours(
         thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE
     )
@@ -27,7 +29,9 @@ def get_contouring(thresh, face_mid_y, frame, is_right: bool = False) -> Mat:
         cy = int(moment["m01"] / moment["m00"])
         if is_right:
             cx += face_mid_y
-        cv2.circle(frame, (cx, cy), 4, bgr_blue, 2)
+        if frame is not None:
+            cv2.circle(frame, (cx, cy), 2, bgr_blue, 2)
+        return Point(cx, cy)
     except ValueError:
         pass
     except ZeroDivisionError:

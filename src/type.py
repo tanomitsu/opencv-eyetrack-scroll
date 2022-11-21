@@ -11,7 +11,7 @@ class Point:
         self.y = y
 
     def __str__(self) -> str:
-        return f"Position (${self.x}, ${self.y})"
+        return f"Position ({self.x}, {self.y})"
 
     def to_tuple(self) -> tuple[int, int]:
         return (self.x, self.y)
@@ -22,7 +22,7 @@ class Point:
         elif isinstance(other, int):
             return Point(self.x + other, self.y + other)
         else:
-            raise TypeError(f"You cannot add Point with ${type(other)}.")
+            raise TypeError(f"You cannot add Point with {type(other)}.")
 
     def __iadd__(self, other: Any) -> "Point":
         new_point = self + other

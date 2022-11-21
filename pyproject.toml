@@ -13,6 +13,7 @@ packages = [
 python = "^3.10"
 dlib = "^19.24.0"
 opencv-python = "^4.6.0.66"
+pynput = "^1.7.6"
 
 
 [tool.poetry.group.dev.dependencies]

@@ -11,6 +11,7 @@ from .face.face_detect import get_one_face, get_face_mid
 from .type import Point
 from .color import bgr_red
 from .eye.eye_detect import get_eye_center, extract_eyes, get_contouring
+from src.mouse.mouse_controller import scroll
 
 predictor = dlib.shape_predictor("data/shape_68.dat")
 
@@ -28,6 +29,8 @@ def main() -> None:
     cv2.namedWindow("display")
     cv2.createTrackbar("threshold", "display", 0, 255, do_nothing)
     while True:
+        # fps測定
+        tick = cv2.getTickCount()
         ret, frame = cap.read()
         if ret is False:
             break
@@ -78,13 +81,29 @@ def main() -> None:
             thresh_inv = cv2.bitwise_not(thresh_blur)
 
             # get the contouring
-            get_contouring(
+            r_cnt_res = get_contouring(
                 thresh_inv[:, :face_mid_x], face_mid_x, display, is_right=False
             )
-            get_contouring(
+            l_cnt_res = get_contouring(
                 thresh_inv[:, face_mid_x:], face_mid_x, display, is_right=True
             )
+            l_diff: Point
+            r_diff: Point
+            if l_cnt_res is not None:
+                l_eye_center = l_cnt_res
+                l_diff = l_eye_center - lc
+                print(f"Left: {l_diff}")
+            else:
+                l_diff = Point(0, 0)
+            if r_cnt_res is not None:
+                r_eye_center = r_cnt_res
+                r_diff = r_eye_center - rc
+                print(f"Right: {r_diff}")
+            else:
+                r_diff = Point(0, 0)
 
+        fps = cv2.getTickFrequency() / (cv2.getTickCount() - tick)
+        print(f"fps: {fps}")
         cv2.imshow("display", display)
         if cv2.waitKey(1) & 0xFF == ord("q"):
             break

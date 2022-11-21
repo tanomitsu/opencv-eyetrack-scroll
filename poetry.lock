@@ -69,6 +69,14 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "evdev"
+version = "1.6.0"
+description = "Bindings to the Linux input handling subsystem"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "exceptiongroup"
 version = "1.0.4"
 description = "Backport of PEP 654 (exception groups)"
@@ -331,6 +339,65 @@ optional = false
 python-versions = ">=3.6"
 
 [[package]]
+name = "pynput"
+version = "1.7.6"
+description = "Monitor and control user input devices"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+evdev = {version = ">=1.3", markers = "sys_platform in \"linux\""}
+pyobjc-framework-ApplicationServices = {version = ">=8.0", markers = "sys_platform == \"darwin\""}
+pyobjc-framework-Quartz = {version = ">=8.0", markers = "sys_platform == \"darwin\""}
+python-xlib = {version = ">=0.17", markers = "sys_platform in \"linux\""}
+six = "*"
+
+[[package]]
+name = "pyobjc-core"
+version = "9.0"
+description = "Python<->ObjC Interoperability Module"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[[package]]
+name = "pyobjc-framework-applicationservices"
+version = "9.0"
+description = "Wrappers for the framework ApplicationServices on macOS"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+pyobjc-core = ">=9.0"
+pyobjc-framework-Cocoa = ">=9.0"
+pyobjc-framework-Quartz = ">=9.0"
+
+[[package]]
+name = "pyobjc-framework-cocoa"
+version = "9.0"
+description = "Wrappers for the Cocoa frameworks on macOS"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+pyobjc-core = ">=9.0"
+
+[[package]]
+name = "pyobjc-framework-quartz"
+version = "9.0"
+description = "Wrappers for the Quartz frameworks on macOS"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+pyobjc-core = ">=9.0"
+pyobjc-framework-Cocoa = ">=9.0"
+
+[[package]]
 name = "pyparsing"
 version = "3.0.9"
 description = "pyparsing module - Classes and methods to define and execute parsing grammars"
@@ -374,6 +441,25 @@ tomli = {version = ">=1.0.0", markers = "python_version < \"3.11\""}
 testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "pygments (>=2.7.2)", "requests", "xmlschema"]
 
 [[package]]
+name = "python-xlib"
+version = "0.32"
+description = "Python X Library"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+six = ">=1.10.0"
+
+[[package]]
+name = "six"
+version = "1.16.0"
+description = "Python 2 and 3 compatibility utilities"
+category = "main"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
+
+[[package]]
 name = "tomli"
 version = "2.0.1"
 description = "A lil' TOML parser"
@@ -392,7 +478,7 @@ python-versions = ">=3.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "bb5452a3379de14433297f026b453b85e47896d7c645d7b788e089bf3ddc9f4f"
+content-hash = "befa70fc3711ff517a6bbfefa60846e147b8065672773cdb17d3cc86003be71c"
 
 [metadata.files]
 attrs = [
@@ -436,6 +522,9 @@ dlib = [
 eradicate = [
     {file = "eradicate-2.1.0-py3-none-any.whl", hash = "sha256:8bfaca181db9227dc88bdbce4d051a9627604c2243e7d85324f6d6ce0fd08bb2"},
     {file = "eradicate-2.1.0.tar.gz", hash = "sha256:aac7384ab25b1bf21c4c012de9b4bf8398945a14c98c911545b2ea50ab558014"},
+]
+evdev = [
+    {file = "evdev-1.6.0.tar.gz", hash = "sha256:ecfa01b5c84f7e8c6ced3367ac95288f43cd84efbfd7dd7d0cdbfc0d18c87a6a"},
 ]
 exceptiongroup = [
     {file = "exceptiongroup-1.0.4-py3-none-any.whl", hash = "sha256:542adf9dea4055530d6e1279602fa5cb11dab2395fa650b8674eaec35fc4a828"},
@@ -588,6 +677,46 @@ pyflakes = [
     {file = "pyflakes-2.5.0-py2.py3-none-any.whl", hash = "sha256:4579f67d887f804e67edb544428f264b7b24f435b263c4614f384135cea553d2"},
     {file = "pyflakes-2.5.0.tar.gz", hash = "sha256:491feb020dca48ccc562a8c0cbe8df07ee13078df59813b83959cbdada312ea3"},
 ]
+pynput = [
+    {file = "pynput-1.7.6-py2.py3-none-any.whl", hash = "sha256:19861b2a0c430d646489852f89500e0c9332e295f2c020e7c2775e7046aa2e2f"},
+    {file = "pynput-1.7.6.tar.gz", hash = "sha256:3a5726546da54116b687785d38b1db56997ce1d28e53e8d22fc656d8b92e533c"},
+]
+pyobjc-core = [
+    {file = "pyobjc-core-9.0.tar.gz", hash = "sha256:3e7010c648eb94b16dd37a55f7719ed3bef6559edf4cf8fd741f46869dc223b1"},
+    {file = "pyobjc_core-9.0-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:548a069666ac07686ac3d987f7d006abd3e713738ec1b9dbcc9195c74cb60eae"},
+    {file = "pyobjc_core-9.0-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:b1eee6099b5b480cedee3803f1be75131d12509f8e0228758954df150ab15dcd"},
+    {file = "pyobjc_core-9.0-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:886050e8e1ff00e5502e5180df00a463b4f869d902c861ca3283b896f47d35f0"},
+    {file = "pyobjc_core-9.0-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:a36752bc8fcf839694e6eff85ef54f8bc3c0ba71f0f42c9aa7a47b23f3cbd137"},
+    {file = "pyobjc_core-9.0-cp38-cp38-macosx_11_0_universal2.whl", hash = "sha256:1640dd25122a146162bdd1c1f46a4564606325788c5d13f1047182bb4f02cd0e"},
+    {file = "pyobjc_core-9.0-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:4296f7b11912709e5aa3d60e1cce6e1731abb7cda47fce72619804c7892b22c3"},
+]
+pyobjc-framework-applicationservices = [
+    {file = "pyobjc-framework-ApplicationServices-9.0.tar.gz", hash = "sha256:bed332b53f2429219df4ba43a99e85b3305f82dcee0bd370849f84c3d786fd69"},
+    {file = "pyobjc_framework_ApplicationServices-9.0-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:35250c8f5f5e7c6125b79a85668d4483e1715fe511d6ceaf90d1916a69b14b03"},
+    {file = "pyobjc_framework_ApplicationServices-9.0-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:eaaf45480066b5383f17631a2beea0e31b317317573965988313963142f93c2f"},
+    {file = "pyobjc_framework_ApplicationServices-9.0-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:2e331bc9d33b9fea2d38c7628894bf121f9bb2ad90751adace1629d69da05fb8"},
+    {file = "pyobjc_framework_ApplicationServices-9.0-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:3bf26ef30f49a28bdaa2cc8dc36bb9d6c469dc9083b0addb3c7dbfc212de794e"},
+    {file = "pyobjc_framework_ApplicationServices-9.0-cp38-cp38-macosx_11_0_universal2.whl", hash = "sha256:c184817fb30a3da1733790d12e15eae93b0727201b742c7890bfef38f22fdf2d"},
+    {file = "pyobjc_framework_ApplicationServices-9.0-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:d2f79765874ba9190082aa0c4eec68ea888cc4b07433135468f48521fa0fb15b"},
+]
+pyobjc-framework-cocoa = [
+    {file = "pyobjc-framework-Cocoa-9.0.tar.gz", hash = "sha256:1a511c620e9b7ef22f2f4fa68572902cb614e66d3dbfa9e46a1a05f000f30084"},
+    {file = "pyobjc_framework_Cocoa-9.0-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:c36e357641f7a6ee44fd4c21bf8b72882b74c64f9489858fa35b6edfde49b6bf"},
+    {file = "pyobjc_framework_Cocoa-9.0-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:b1dd493665319e526a269f57052ae7acd331efb5e5f1b854ae8e1f10ad446698"},
+    {file = "pyobjc_framework_Cocoa-9.0-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:a4cd119626f5e8c41e790325902eed4c8d9f9d73aa9dfa90b0870d61f0c84862"},
+    {file = "pyobjc_framework_Cocoa-9.0-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:25d287d9fc1ed98becdcb80926e05a71b22e195d7552f504791e1200334de2ae"},
+    {file = "pyobjc_framework_Cocoa-9.0-cp38-cp38-macosx_11_0_universal2.whl", hash = "sha256:6fa8e0d34e2786d7f80fd70ac4f6d9575e665e326afc4b5fffb60590344b0f98"},
+    {file = "pyobjc_framework_Cocoa-9.0-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:dc801d2a5d25bf834a78438446a9c9bd0baee6006a540fdd2f4efb5b8536ed41"},
+]
+pyobjc-framework-quartz = [
+    {file = "pyobjc-framework-Quartz-9.0.tar.gz", hash = "sha256:c83639e88d13bec2395a77170a334d2570bf8119c16684c008fd1d0ba34bc290"},
+    {file = "pyobjc_framework_Quartz-9.0-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:416f154c6c0eac49bf79ec1b7ac56d0bad36c7486148129ad573a14d0b183d8e"},
+    {file = "pyobjc_framework_Quartz-9.0-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:cc46ff5cf8cbcd7a40b12b347a51a67018a9bb6bbcdab8167bbf5f20fef43f4d"},
+    {file = "pyobjc_framework_Quartz-9.0-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:26659078c6d57daeeb14a8f049ac492e811f4de9c525df9bfb0124a7ec9fe777"},
+    {file = "pyobjc_framework_Quartz-9.0-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:55cd5f141eae7d96ba13b5003725e45123981cc1de83b8c4da2e45d9531d5a10"},
+    {file = "pyobjc_framework_Quartz-9.0-cp38-cp38-macosx_11_0_universal2.whl", hash = "sha256:ee2c4f19271dd4f52f4879fe5663942c25e7c7787537aec425ef1602a9925750"},
+    {file = "pyobjc_framework_Quartz-9.0-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:fb8a42641f7d7384683617f091cbc522c4da8296d969ad4b7685ccc4f82e1e0d"},
+]
 pyparsing = [
     {file = "pyparsing-3.0.9-py3-none-any.whl", hash = "sha256:5026bae9a10eeaefb61dab2f09052b9f4307d44aee4eda64b309723d8d206bbc"},
     {file = "pyparsing-3.0.9.tar.gz", hash = "sha256:2b020ecf7d21b687f219b71ecad3631f644a47f01403fa1d1036b0c6416d70fb"},
@@ -599,6 +728,14 @@ pyproject-flake8 = [
 pytest = [
     {file = "pytest-7.2.0-py3-none-any.whl", hash = "sha256:892f933d339f068883b6fd5a459f03d85bfcb355e4981e146d2c7616c21fef71"},
     {file = "pytest-7.2.0.tar.gz", hash = "sha256:c4014eb40e10f11f355ad4e3c2fb2c6c6d1919c73f3b5a433de4708202cade59"},
+]
+python-xlib = [
+    {file = "python-xlib-0.32.tar.gz", hash = "sha256:20e1382f8a98d8ed0facfa45415c46fd0c8eeb6f9996e58c22d3382a4ed6e37b"},
+    {file = "python_xlib-0.32-py2.py3-none-any.whl", hash = "sha256:522dc1ec9fef20a7968532766cdb84155e5ef428751754a9443837094092be46"},
+]
+six = [
+    {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
+    {file = "six-1.16.0.tar.gz", hash = "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926"},
 ]
 tomli = [
     {file = "tomli-2.0.1-py3-none-any.whl", hash = "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc"},
