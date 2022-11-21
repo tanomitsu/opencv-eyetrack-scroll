@@ -31,5 +31,6 @@
         "**/__init__.py": true,
         "**/__pycache__": true,
         "**/__main__.py": true,
+        "**/.gitkeep": true,
     }
 }
