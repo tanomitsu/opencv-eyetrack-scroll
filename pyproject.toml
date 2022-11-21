@@ -11,6 +11,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.10"
+dlib = "^19.24.0"
 opencv-python = "^4.6.0.66"
 
 
