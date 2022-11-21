@@ -11,7 +11,9 @@
     "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
     "python.formatting.provider": "black",
     "python.formatting.blackPath": "${workspaceFolder}/.venv/bin/black",
-    "isort.path": ["${workspaceFolder}/.venv/bin/isort"],
+    "isort.path": [
+        "${workspaceFolder}/.venv/bin/isort"
+    ],
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
     "python.linting.flake8Args": [
@@ -22,6 +24,12 @@
     ],
     "python.linting.flake8Path": "${workspaceFolder}/.venv/bin/flake8",
     "python.linting.mypyEnabled": true,
-    "python.linting.mypyPath": "${workspaceFolder}/.venv/bin/mypy"
-    // "python.linting.mypyArgs": ["--strict"]
+    "python.linting.mypyPath": "${workspaceFolder}/.venv/bin/mypy",
+    // Don't show unneccesary files
+    "files.exclude": {
+        "**/.git": true,
+        "**/__init__.py": true,
+        "**/__pycache__": true,
+        "**/__main__.py": true,
+    }
 }
