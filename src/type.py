@@ -1,5 +1,6 @@
 import numpy as np
 from numpy.typing import NDArray
+import cv2
 from typing import Any
 
 Mat = NDArray[np.uint32]
@@ -40,3 +41,16 @@ class Point:
         if other == 0:
             raise ValueError("You cannot divide by zero.")
         return Point(self.x // other, self.y // other)
+
+    @staticmethod
+    def get_distance(a: "Point", b: "Point") -> float:
+        return float(np.sqrt(np.square(a.x - b.x) + np.square(a.y - b.y)))
+
+    @staticmethod
+    def from_contour(cnt: Any) -> Any:
+        moment = cv2.moments(cnt)
+        if moment["m00"] == 0:
+            return None
+        cx = int(moment["m10"] / moment["m00"])
+        cy = int(moment["m01"] / moment["m00"])
+        return Point(cx, cy)

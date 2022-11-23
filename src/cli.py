@@ -9,9 +9,9 @@ import dlib
 
 from .face.face_detect import get_one_face, get_face_mid
 from .type import Point
-from .color import bgr_red
+from .color import bgr_red, bgr_white
 from .eye.eye_detect import get_eye_center, extract_eyes, get_contouring
-from src.mouse.mouse_controller import scroll
+from src.mouse.scroll import scroll, get_move
 
 predictor = dlib.shape_predictor("data/shape_68.dat")
 
@@ -101,11 +101,13 @@ def main() -> None:
                 print(f"Right: {r_diff}")
             else:
                 r_diff = Point(0, 0)
+            total_diff = l_diff + r_diff
+            scroll(0, -get_move(total_diff.x))
 
         fps = cv2.getTickFrequency() / (cv2.getTickCount() - tick)
         print(f"fps: {fps}")
         cv2.imshow("display", display)
-        if cv2.waitKey(1) & 0xFF == ord("q"):
+        if cv2.waitKey(50) & 0xFF == ord("q"):
             break
 
     cap.release()

@@ -15,27 +15,66 @@ def get_eye_center(points: list[Point]) -> Point:
     return sum_point // n
 
 
+def eval_contour(cnt, prev_point: Point = None) -> int:
+    alpha = 0
+    if prev_point is None:
+        return cv2.contourArea(cnt)
+    else:
+        cnt_point = Point.from_contour(cnt)
+        if cnt_point is None:
+            raise ValueError("point is Null")
+        print(
+            f"dist: {Point.get_distance(Point.from_contour(cnt), prev_point)}"
+        )
+        print(f"area: {cv2.contourArea(cnt)}")
+        return cv2.contourArea(cnt) - alpha * np.square(
+            Point.get_distance(cnt_point, prev_point)
+        )
+
+
 # 目の輪郭を検知して円を描画する関数
 def get_contouring(
     thresh, face_mid_y, frame=None, is_right: bool = False
 ) -> Point | None:
+    index = int(is_right)
     cnts, _ = cv2.findContours(
         thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE
     )
+    # for cnt in cnts:
+    #     cnt_point = Point.from_contour(cnt)
+    #     if cnt_point is None:
+    #         continue
+    #     if is_right:
+    #         cnt_point.x += face_mid_y
+    #     cv2.circle(frame, cnt_point.to_tuple(), 2, bgr_white, 2)
     try:
-        cnt = max(cnts, key=cv2.contourArea)
-        moment = cv2.moments(cnt)
-        cx = int(moment["m10"] / moment["m00"])
-        cy = int(moment["m01"] / moment["m00"])
+        cnt = max(
+            cnts,
+            key=lambda cnt: eval_contour(
+                cnt, get_contouring.prev_points[index]
+            ),
+        )
+        c = Point.from_contour(cnt)
+        if c is None:
+            raise ValueError("point is Null.")
         if is_right:
-            cx += face_mid_y
+            c.x += face_mid_y
+        get_contouring.prev_points[index] = c
         if frame is not None:
-            cv2.circle(frame, (cx, cy), 2, bgr_blue, 2)
-        return Point(cx, cy)
+            cv2.circle(frame, (c.x, c.y), 2, bgr_blue, 2)
+        return Point(c.x, c.y)
     except ValueError:
         pass
     except ZeroDivisionError:
         pass
+
+
+"""
+    variable: prev_points
+    index=0: left_eye
+    index=1: right_eye
+"""
+get_contouring.prev_points: list[Point | None] = [None, None]
 
 
 def extract_eyes(frame: Mat, lps: list[Point], rps: list[Point]) -> Mat:
