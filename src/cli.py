@@ -25,9 +25,10 @@ def do_nothing(val) -> None:
 
 
 def main() -> None:
+    threshold = 30
     cap = cv2.VideoCapture(0)
     cv2.namedWindow("display")
-    cv2.createTrackbar("threshold", "display", 0, 255, do_nothing)
+    # cv2.createTrackbar("threshold", "display", 0, 255, do_nothing)
     while True:
         # fps測定
         tick = cv2.getTickCount()
@@ -71,7 +72,7 @@ def main() -> None:
             eyes_frame_gray = cv2.cvtColor(eyes_frame, cv2.COLOR_BGR2GRAY)
 
             # threshold
-            threshold = cv2.getTrackbarPos("threshold", "display")
+            # threshold = cv2.getTrackbarPos("threshold", "display")
             _, thresh = cv2.threshold(
                 eyes_frame_gray, threshold, 255, cv2.THRESH_BINARY
             )
