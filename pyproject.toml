@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "myapp"
+name = "opencv-eyetrack-scroll"
 version = "0.1.0"
 description = ""
-authors = ["tanomitsu2002 <tanomitsu2002@gmail.com>"]
+authors = ["tanomitsu2002"]
 readme = "README.md"
 packages = [
   {include = "src"},
