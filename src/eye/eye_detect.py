@@ -1,8 +1,10 @@
+# Third Party Library
 import cv2
 import numpy as np
 
-from src.type import Point, Mat
-from src.color import bgr_black, bgr_white, bgr_blue
+# First Party Library
+from src.color import bgr_black, bgr_blue, bgr_white
+from src.type import Mat, Point
 
 
 def get_eye_center(points: list[Point]) -> Point:
@@ -40,13 +42,6 @@ def get_contouring(
     cnts, _ = cv2.findContours(
         thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE
     )
-    # for cnt in cnts:
-    #     cnt_point = Point.from_contour(cnt)
-    #     if cnt_point is None:
-    #         continue
-    #     if is_right:
-    #         cnt_point.x += face_mid_y
-    #     cv2.circle(frame, cnt_point.to_tuple(), 2, bgr_white, 2)
     try:
         cnt = max(
             cnts,

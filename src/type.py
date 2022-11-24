@@ -1,7 +1,10 @@
+# Standard Library
+from typing import Any
+
+# Third Party Library
+import cv2
 import numpy as np
 from numpy.typing import NDArray
-import cv2
-from typing import Any
 
 Mat = NDArray[np.uint32]
 

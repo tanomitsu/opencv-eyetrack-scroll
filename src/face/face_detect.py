@@ -1,8 +1,10 @@
-import dlib
+# Third Party Library
 import cv2
+import dlib
 
-from src.type import Mat, Point
+# First Party Library
 from src.color import bgr_black
+from src.type import Mat, Point
 
 face_detector = dlib.get_frontal_face_detector()
 

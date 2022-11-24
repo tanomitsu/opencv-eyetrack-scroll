@@ -1,18 +1,22 @@
+# Third Party Library
+import cv2
+import dlib
+
+# First Party Library
+from src.mouse.scroll import get_move, scroll
+
+# Local Library
+from .color import bgr_red
+from .eye.eye_detect import extract_eyes, get_contouring, get_eye_center
+from .face.face_detect import get_face_mid, get_one_face
+from .type import Point
+
 """
 landmarks:
     右目: [36, 37, 38, 39, 40, 41]
     左目: [42, 43, 44, 45, 46, 47]
     中心線: [27, 28, 29, 30]
 """
-import cv2
-import dlib
-
-from .face.face_detect import get_one_face, get_face_mid
-from .type import Point
-from .color import bgr_red, bgr_white
-from .eye.eye_detect import get_eye_center, extract_eyes, get_contouring
-from src.mouse.scroll import scroll, get_move
-
 predictor = dlib.shape_predictor("data/shape_68.dat")
 
 right_indices = list(range(36, 42))
@@ -20,7 +24,7 @@ left_indices = list(range(42, 48))
 center_indices = list(range(27, 31))
 
 
-def do_nothing(val) -> None:
+def do_nothing(_) -> None:
     pass
 
 
@@ -28,7 +32,6 @@ def main() -> None:
     threshold = 30
     cap = cv2.VideoCapture(0)
     cv2.namedWindow("display")
-    # cv2.createTrackbar("threshold", "display", 0, 255, do_nothing)
     while True:
         # fps測定
         tick = cv2.getTickCount()
@@ -72,7 +75,6 @@ def main() -> None:
             eyes_frame_gray = cv2.cvtColor(eyes_frame, cv2.COLOR_BGR2GRAY)
 
             # threshold
-            # threshold = cv2.getTrackbarPos("threshold", "display")
             _, thresh = cv2.threshold(
                 eyes_frame_gray, threshold, 255, cv2.THRESH_BINARY
             )
